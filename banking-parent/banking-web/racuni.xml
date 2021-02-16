@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Document xmlns="urn:iso:std:iso:20022:tech:xsd:scthr:pain.001.001.03">
+  <CstmrCdtTrfInitn>
+    <GrpHdr>
+      <MsgId>UN202012040001701</MsgId>
+      <CreDtTm>2020-12-04T15:57:52.753</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+      <CtrlSum>20.01</CtrlSum>
+      <InitgPty>
+        <Nm>Karlo Belavić</Nm>
+      </InitgPty>
+    </GrpHdr>
+      <PmtInf>
+        <PmtInfId>e27736d3-4baa-4ee1-bb77-e37bdd83dc9b</PmtInfId>
+        <PmtMtd>TRF</PmtMtd>
+        <NbOfTxs>1</NbOfTxs>
+        <CtrlSum>20.01</CtrlSum>
+        <PmtTpInf>
+          <LclInstrm>
+            <Cd>TRF</Cd>
+          </LclInstrm>
+        </PmtTpInf>
+        <ReqdExctnDt>2020-12-04</ReqdExctnDt>
+        <Dbtr>
+          <Nm>Karlo Belavić</Nm>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>HR0000000000000000000</IBAN>
+          </Id>
+        </DbtrAcct>
+        <DbtrAgt>
+          <FinInstnId>
+              
+              <Othr>
+                <Id>NOTPROVIDED</Id>
+              </Othr>
+          </FinInstnId>
+        </DbtrAgt>
+          <CdtTrfTxInf>
+            <PmtId>
+              <EndToEndId>HR01234-678</EndToEndId>
+            </PmtId>
+            <Amt>
+              <InstdAmt Ccy="HRK">20.01</InstdAmt>
+            </Amt>
+            <Cdtr>
+              <Nm>Jane Doe</Nm>
+            </Cdtr>
+            <CdtrAcct>
+              <Id>
+                <IBAN>HR0000000000000000004</IBAN>
+              </Id>
+            </CdtrAcct>
+            <RmtInf>
+              <Strd>
+                <CdtrRefInf>
+                  <Tp>
+                    <CdOrPrtry>
+                      <Cd>SCOR</Cd>
+                    </CdOrPrtry>
+                  </Tp>
+                  <Ref>HR01234-678</Ref>
+                </CdtrRefInf>
+                <AddtlRmtInf>Prvi račun</AddtlRmtInf>
+              </Strd>
+            </RmtInf>
+          </CdtTrfTxInf>
+      </PmtInf>
+  </CstmrCdtTrfInitn>
+</Document>

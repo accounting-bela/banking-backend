@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:scthr:pain.001.001.03">
+  <CstmrCdtTrfInitn>
+    <GrpHdr>
+      <MsgId th:text="${bill.header.msgId}"></MsgId>
+      <CreDtTm th:text="${bill.header.creDtTm}"></CreDtTm>
+      <NbOfTxs th:text="${bill.header.nbOfTxs}"></NbOfTxs>
+      <CtrlSum th:text="${bill.header.ctrlSum}"></CtrlSum>
+      <InitgPty>
+        <Nm th:text="${bill.header.payerName}"></Nm>
+      </InitgPty>
+    </GrpHdr>
+      <PmtInf th:each="group: ${bill.groups}">
+        <PmtInfId th:text="${group.pmtInfId}"></PmtInfId>
+        <PmtMtd>TRF</PmtMtd>
+        <NbOfTxs th:text="${group.nbOfTxs}"></NbOfTxs>
+        <CtrlSum th:text="${group.ctrlSum}"></CtrlSum>
+        <PmtTpInf>
+          <LclInstrm>
+            <Cd>TRF</Cd>
+          </LclInstrm>
+        </PmtTpInf>
+        <ReqdExctnDt th:text="${group.reqdExctnDt}"></ReqdExctnDt>
+        <Dbtr>
+          <Nm th:text="${group.dbtrNm}"></Nm>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN th:text="${group.dbtrIban}"></IBAN>
+          </Id>
+        </DbtrAcct>
+        <DbtrAgt>
+          <FinInstnId>
+              <BIC th:if="${group.bic != null}">{{ bic }}</BIC>
+              <Othr th:if="${group.bic == null}">
+                <Id>NOTPROVIDED</Id>
+              </Othr>
+          </FinInstnId>
+        </DbtrAgt>
+          <CdtTrfTxInf th:each="transaction: ${group.transactions}">
+            <PmtId>
+              <EndToEndId th:text="${transaction.endToEndId}"></EndToEndId>
+            </PmtId>
+            <Amt>
+              <InstdAmt Ccy="HRK" th:text="${transaction.amt}"></InstdAmt>
+            </Amt>
+            <Cdtr>
+              <Nm th:text="${transaction.cdtrNm}"></Nm>
+            </Cdtr>
+            <CdtrAcct>
+              <Id>
+                <IBAN th:text="${transaction.cdtrIban}"></IBAN>
+              </Id>
+            </CdtrAcct>
+            <RmtInf>
+              <Strd>
+                <CdtrRefInf>
+                  <Tp>
+                    <CdOrPrtry>
+                      <Cd>SCOR</Cd>
+                    </CdOrPrtry>
+                  </Tp>
+                  <Ref th:text="${transaction.ref}"></Ref>
+                </CdtrRefInf>
+                <AddtlRmtInf th:text="${transaction.addtlRmtInf}"></AddtlRmtInf>
+              </Strd>
+            </RmtInf>
+          </CdtTrfTxInf>
+      </PmtInf>
+  </CstmrCdtTrfInitn>
+</Document>

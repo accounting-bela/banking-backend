@@ -1,0 +1,16 @@
+version: "3"
+services:
+  postgres:
+      container_name: "banking"
+      image: postgres:latest
+      volumes:
+        - /var/lib/backup/data-accounting
+        - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+      ports:
+        - 5433:5432
+      environment:
+          - POSTGRES_PASSWORD=TVZaccountingTVZ
+          - POSTGRES_USER=accounting
+          - POSTGRES_DB=accounting_dev
+      expose:
+        - 5433
