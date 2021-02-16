@@ -130,5 +130,5 @@
 		    <version>3.0.11.RELEASE</version>
 		</dependency>
   	</dependencies>
-  </dependencyManagement>
+  </dependencyManagement> 
 </project>
