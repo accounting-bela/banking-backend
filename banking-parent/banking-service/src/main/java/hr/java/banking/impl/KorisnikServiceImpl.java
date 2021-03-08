@@ -8,19 +8,16 @@ import org.springframework.stereotype.Service;
 import hr.java.banking.KorisnikService;
 import hr.java.banking.entities.Korisnik;
 import hr.java.banking.exceptions.BankingStatusException;
-import hr.java.banking.keycloak.KeycloakService;
 import hr.java.banking.repository.KorisnikRepository;
 import hr.java.banking.request.KorisnikRequest;
 
 @Service
 public class KorisnikServiceImpl extends BaseServiceImpl<Korisnik, KorisnikRepository> implements KorisnikService {
 	
-	private KeycloakService keycloakService;
 
 	@Autowired
-	public KorisnikServiceImpl(KorisnikRepository repository, KeycloakService keycloakService) {
+	public KorisnikServiceImpl(KorisnikRepository repository) {
 		super(repository);
-		this.keycloakService = keycloakService;
 	}
 
 	@Override
@@ -52,7 +49,6 @@ public class KorisnikServiceImpl extends BaseServiceImpl<Korisnik, KorisnikRepos
 
 	@Override
 	public Korisnik createUser(KorisnikRequest korisnikRequest) throws BankingStatusException {
-		Korisnik korisnik = keycloakService.createAccount(korisnikRequest);
 		return super.save(korisnik);
 	}
 
