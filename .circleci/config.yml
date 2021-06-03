@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/openjdk:8.0.0
+      - image: cimg/openjdk:8.0.282
 
     working_directory: ~/banking-backend/baking-parent
     
