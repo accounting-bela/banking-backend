@@ -3,9 +3,10 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:8.0.282
+      - image: docker:17.05.0-ce-git
 
     working_directory: ~/banking-backend/banking-parent
-    
+
     steps:
       # git pull
       - checkout:
