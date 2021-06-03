@@ -138,6 +138,9 @@
 						<ports>
 							<port>8080</port>
 						</ports>
+						<container>
+                            <mainClass>hr.java.banking.BankingWebApplication</mainClass>
+                        </container>
 					</container>
 				</configuration>
 			</plugin>
