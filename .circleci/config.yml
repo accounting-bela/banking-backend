@@ -3,7 +3,7 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:8.0.282
-      - image: docker:17.05.0-ce-git
+      - image: circleci/buildpack-deps:stretch
 
     working_directory: ~/banking-backend/banking-parent
 
@@ -11,6 +11,9 @@ jobs:
       # git pull
       - checkout:
           path: ~/banking-backend
+
+      - setup_remote_docker    
+
       # setup testing env
       - run:
           name: Login to DockerHub
