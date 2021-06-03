@@ -105,45 +105,5 @@
 		    <version>2.6</version>
 		</dependency>
   	</dependencies>
-  </dependencyManagement> 
-  
-  <build>
-		<resources>
-	        <resource>
-	            <directory>src/main/resources</directory>
-	            <filtering>true</filtering>
-	        </resource>
-	    </resources>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<executions>
-                <execution>
-                    <goals>
-                        <goal>repackage</goal>
-                    </goals>
-                </execution>
-            </executions>
-			</plugin>
-			<plugin>
-				<groupId>com.google.cloud.tools</groupId>
-				<artifactId>jib-maven-plugin</artifactId>
-				<version>0.10.1</version>
-				<configuration>
-					<from>
-						<image>oopenjdk:8-alpine</image>
-					</from>
-					<container>
-						<ports>
-							<port>8080</port>
-						</ports>
-						<container>
-                            <mainClass>hr.java.banking.BankingWebApplication</mainClass>
-                        </container>
-					</container>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  </dependencyManagement>
 </project>
