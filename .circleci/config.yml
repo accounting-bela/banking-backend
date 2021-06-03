@@ -31,7 +31,7 @@ jobs:
       - run: mvn clean package
 
       # build and push docker image to docker hub
-      - run: mvn clean compile -f ./banking-web/pom.xml jib:build -Dimage=lahur.ddns.net:5000/banking-backend:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Dimage=lahur.ddns.net:5000/banking-backend:$CIRCLE_BUILD_NUM
 
       # store raw contents of src code
       - store_artifacts:
