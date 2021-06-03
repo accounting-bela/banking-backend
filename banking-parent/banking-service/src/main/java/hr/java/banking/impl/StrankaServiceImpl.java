@@ -2,16 +2,13 @@ package hr.java.banking.impl;
 
 import java.util.Optional;
 import java.util.Set;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import hr.java.banking.AdresaService;
-import hr.java.banking.KorisnikService;
 import hr.java.banking.StrankaService;
 import hr.java.banking.entities.Adresa;
-import hr.java.banking.entities.Korisnik;
 import hr.java.banking.entities.Stranka;
 import hr.java.banking.exceptions.BankingStatusException;
 import hr.java.banking.repository.StrankaRepository;
@@ -21,15 +18,12 @@ import hr.java.banking.repository.StrankaRepository;
 public class StrankaServiceImpl extends BaseServiceImpl<Stranka, StrankaRepository> implements StrankaService {
 	
 	private AdresaService adresaService;
-	
-	private KorisnikService korisnikService;
+
 
 	@Autowired
-	public StrankaServiceImpl(StrankaRepository repository, AdresaService adresaService,
-			KorisnikService korisnikService) {
+	public StrankaServiceImpl(StrankaRepository repository, AdresaService adresaService) {
 		super(repository);
 		this.adresaService = adresaService;
-		this.korisnikService = korisnikService;
 	}
 
 
@@ -100,8 +94,7 @@ public class StrankaServiceImpl extends BaseServiceImpl<Stranka, StrankaReposito
 
 	@Override
 	public Set<Stranka> findForKorisnik(String keycloakId) {
-		Korisnik korisnik = korisnikService.findByKeycloakId(keycloakId).get();
-		return korisnik.getStranke();
+		return repository.findByKorisnikId(keycloakId);
 	}
 
 
@@ -110,8 +103,7 @@ public class StrankaServiceImpl extends BaseServiceImpl<Stranka, StrankaReposito
 
 	@Override
 	public Iterable<Stranka> findOther(String keycloakId) {
-		Korisnik korisnik = korisnikService.findByKeycloakId(keycloakId).get();
-		return repository.findByKorisnik_IdNotOrKorisnikIsNull(korisnik.getId());
+		return repository.findByKorisnikIdNotOrKorisnikIdIsNull(keycloakId);
 	}
 
 
@@ -120,8 +112,7 @@ public class StrankaServiceImpl extends BaseServiceImpl<Stranka, StrankaReposito
 
 	@Override
 	public Stranka saveMyStranka(Stranka stranka, String keycloakId) throws BankingStatusException {
-		Korisnik korisnik = korisnikService.findByKeycloakId(keycloakId).get();
-		stranka.setKorisnik(korisnik);
+		stranka.setKorisnikId(keycloakId);
 		return save(stranka);
 	}
 

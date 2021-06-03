@@ -8,14 +8,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -32,12 +30,10 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 import hr.java.banking.BillTemplate;
-import hr.java.banking.KorisnikService;
 import hr.java.banking.RacunService;
 import hr.java.banking.RequestService;
 import hr.java.banking.SifraNamjeneService;
 import hr.java.banking.StrankaService;
-import hr.java.banking.entities.Korisnik;
 import hr.java.banking.entities.Racun;
 import hr.java.banking.entities.SifraNamjene;
 import hr.java.banking.entities.Stranka;
@@ -49,8 +45,6 @@ public class RacunServiceImpl extends BaseServiceImpl<Racun, RacunRepository> im
 	
 	private StrankaService strankaService;
 	
-	private KorisnikService korisnikService;
-	
 	private SifraNamjeneService sifraService;
 	
 	private RequestService requestService;
@@ -59,11 +53,10 @@ public class RacunServiceImpl extends BaseServiceImpl<Racun, RacunRepository> im
 
 
 	@Autowired
-	public RacunServiceImpl(RacunRepository repository, StrankaService strankaService, KorisnikService korisnikService,
-			SifraNamjeneService sifraService, RequestService requestService, SpringTemplateEngine engine) {
+	public RacunServiceImpl(RacunRepository repository, StrankaService strankaService, SifraNamjeneService sifraService,
+							RequestService requestService, SpringTemplateEngine engine) {
 		super(repository);
 		this.strankaService = strankaService;
-		this.korisnikService = korisnikService;
 		this.sifraService = sifraService;
 		this.requestService = requestService;
 		this.engine = engine;
@@ -126,7 +119,6 @@ public class RacunServiceImpl extends BaseServiceImpl<Racun, RacunRepository> im
 	
 	@Override
 	public Racun createRacunOutgoing(Racun object, String keycloakId) throws BankingStatusException {
-		Korisnik korisnik = korisnikService.findByKeycloakId(keycloakId).get();
 		Racun racun = new Racun();
 		Optional<Stranka> optionalStranka = object.getPrimatelj().getId() != null ? strankaService.findOne(object.getPrimatelj().getId()) : Optional.empty();
 		Stranka primatelj = null;
@@ -144,7 +136,7 @@ public class RacunServiceImpl extends BaseServiceImpl<Racun, RacunRepository> im
 			else
 			{
 				primatelj = object.getPrimatelj();
-				primatelj.setKorisnik(korisnik);
+				primatelj.setKorisnikId(keycloakId);
 				primatelj = strankaService.save(primatelj);
 			}
 		}
@@ -197,7 +189,6 @@ public class RacunServiceImpl extends BaseServiceImpl<Racun, RacunRepository> im
 
 	@Override
 	public Racun createRacunIngoing(Racun object, String keycloakId) throws BankingStatusException {
-		Korisnik korisnik = korisnikService.findByKeycloakId(keycloakId).get();
 		Racun racun = new Racun();
 		Optional<Stranka> optionalStranka = object.getPrimatelj().getId() != null ? strankaService.findOne(object.getPrimatelj().getId()) : Optional.empty();
 		Stranka primatelj = null;
@@ -249,7 +240,7 @@ public class RacunServiceImpl extends BaseServiceImpl<Racun, RacunRepository> im
 			else
 			{
 				uplatitelj = object.getUplatitelj();
-				uplatitelj.setKorisnik(korisnik);
+				uplatitelj.setKorisnikId(keycloakId);
 				strankaService.save(uplatitelj);
 			}
 		}
@@ -299,8 +290,7 @@ public class RacunServiceImpl extends BaseServiceImpl<Racun, RacunRepository> im
 
 	@Override
 	public Iterable<Racun> findIngoingRacun(String id) {
-		Korisnik korisnik = korisnikService.findByKeycloakId(id).get();
-		return repository.findAllByUplatitelj_Korisnik_Id(korisnik.getId());
+		return repository.findAllByUplatitelj_KorisnikId(id);
 	}
 
 
@@ -311,8 +301,7 @@ public class RacunServiceImpl extends BaseServiceImpl<Racun, RacunRepository> im
 
 	@Override
 	public Iterable<Racun> findOutgoingRacun(String id) {
-		Korisnik korisnik = korisnikService.findByKeycloakId(id).get();
-		return repository.findAllByPrimatelj_Korisnik_Id(korisnik.getId());
+		return repository.findAllByPrimatelj_KorisnikId(id);
 	}
 
 

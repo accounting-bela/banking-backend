@@ -26,15 +26,13 @@ public class Stranka extends BaseModel {
 	
 	@Column(name="iban")
 	private String iban;
+
+	@Column(name="korisnik_id")
+	private String korisnikId;
 	
 	@ManyToOne
 	@JoinColumn(name = "adresa_id", referencedColumnName = "id")
 	private Adresa adresa;
-	
-	@ManyToOne
-	@JoinColumn(name="korisnik_id", referencedColumnName="id")
-	@JsonIgnore
-	private Korisnik korisnik;
 	
 
 }
