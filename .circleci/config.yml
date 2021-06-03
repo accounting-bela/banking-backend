@@ -20,7 +20,7 @@ jobs:
           keys:
           - banking-backend-{{ checksum "pom.xml" }}
 
-      - run: mvn dependency:go-offline
+      - run: mvn de.qaware.maven:go-offline-maven-plugin:resolve-dependencies
 
       - save_cache:
           paths:
