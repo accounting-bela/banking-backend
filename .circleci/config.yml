@@ -8,8 +8,8 @@ jobs:
     
     steps:
       # git pull
-      - checkout
-
+      - checkout:
+          path: ~/banking-backend
       # setup testing env
       - run:
           name: Login to DockerHub
