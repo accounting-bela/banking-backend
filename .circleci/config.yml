@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: cimg/openjdk:8.0.282
 
-    working_directory: ~/banking-backend/baking-parent
+    working_directory: ~/banking-backend/banking-parent
     
     steps:
       # git pull
@@ -18,22 +18,22 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - baking-backend-{{ checksum "pom.xml" }}
+          - banking-backend-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: baking-backend-{{ checksum "pom.xml" }}
+          key: banking-backend-{{ checksum "pom.xml" }}
         
       # package into a jar
       - run: mvn clean package
 
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=lahur.ddns.net:5000/baking-backend:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Dimage=lahur.ddns.net:5000/banking-backend:$CIRCLE_BUILD_NUM
 
       # store raw contents of src code
       - store_artifacts:
           path: target/classes
-          destination: baking-backend
+          destination: banking-backend
