@@ -3,13 +3,17 @@ jobs:
   build:
     docker:
       - image: cimg/openjdk:8.0.282
+      - image: circleci/buildpack-deps:stretch
 
     working_directory: ~/banking-backend/banking-parent
-    
+
     steps:
       # git pull
       - checkout:
           path: ~/banking-backend
+
+      - setup_remote_docker    
+
       # setup testing env
       - run:
           name: Login to DockerHub
@@ -31,7 +35,9 @@ jobs:
       - run: mvn clean package
 
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=lahur.ddns.net:5000/banking-backend:$CIRCLE_BUILD_NUM
+      - run: docker build -t banking-backend .
+      - run: docker tag banking-backend lahur.ddns.net:5000/banking-backend:$CIRCLE_BUILD_NUM
+      - run: docker push lahur.ddns.net:5000/banking-backend:$CIRCLE_BUILD_NUM
 
       # store raw contents of src code
       - store_artifacts:
