@@ -47,5 +47,5 @@ jobs:
 
       # store raw contents of src code
       - store_artifacts:
-          path: banking-parent/target/classes
+          path: banking-web/target/classes
           destination: banking-backend
