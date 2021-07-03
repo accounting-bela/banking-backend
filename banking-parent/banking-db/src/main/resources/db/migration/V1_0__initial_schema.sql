@@ -41,5 +41,8 @@ CREATE TABLE "racun"(
 	iban VARCHAR(30) NOT NULL,
 	sifra_namjene_id INTEGER NOT NULL,
 	uplatitelj_id VARCHAR(36) NOT NULL,
-	primatelj_id VARCHAR(36) NOT NULL
+	primatelj_id VARCHAR(36) NOT NULL,
+    FOREIGN KEY(uplatitelj_id) REFERENCES stranka(id),
+    FOREIGN KEY(primatelj_id) REFERENCES stranka(id),
+    FOREIGN KEY(sifra_namjene_id) REFERENCES sifra_namjene(rbr)
 );

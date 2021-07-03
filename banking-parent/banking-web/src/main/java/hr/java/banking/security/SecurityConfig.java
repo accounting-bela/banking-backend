@@ -35,27 +35,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         		.antMatchers("/api/korisnik/**").permitAll()
                 .antMatchers("/api/**").hasAuthority("SCOPE_access:api")
                 .and()
-                .cors()
-                .configurationSource(corsConfigurationSource())
-                .and()
                 .oauth2ResourceServer()
                 .jwt()
                 .decoder(jwtDecoder());
     }
 
-    CorsConfigurationSource corsConfigurationSource() {
-        CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedMethods(Arrays.asList(
-                HttpMethod.GET.name(),
-                HttpMethod.PUT.name(),
-                HttpMethod.POST.name(),
-                HttpMethod.DELETE.name()
-        ));
-
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration.applyPermitDefaultValues());
-        return source;
-    }
 
     JwtDecoder jwtDecoder() {
         OAuth2TokenValidator<Jwt> withAudience = new AudienceValidator(audience);
