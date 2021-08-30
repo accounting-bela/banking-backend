@@ -7,16 +7,14 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import hr.java.banking.StrankaService;
 import hr.java.banking.entities.Stranka;
 import hr.java.banking.exceptions.BankingStatusException;
+
+import javax.websocket.server.PathParam;
 
 @RestController
 @RequestMapping("api/stranka")
@@ -40,6 +38,11 @@ public class StrankaController {
 	public Set<Stranka> getOther() {
 		String keycloakId = SecurityContextHolder.getContext().getAuthentication().getName();
 		return new HashSet<Stranka>((Collection) strankaService.findOther(keycloakId));
+	}
+
+	@GetMapping("iban")
+	public Set<Stranka> getByIban(@RequestParam String iban) {
+		return new HashSet<Stranka>((Collection) strankaService.findByIban(iban));
 	}
 	
 	@PostMapping

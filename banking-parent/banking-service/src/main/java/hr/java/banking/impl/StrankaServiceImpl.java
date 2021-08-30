@@ -106,8 +106,10 @@ public class StrankaServiceImpl extends BaseServiceImpl<Stranka, StrankaReposito
 		return repository.findByKorisnikIdNotOrKorisnikIdIsNull(keycloakId);
 	}
 
-
-
+	@Override
+	public Iterable<Stranka> findByIban(String iban) {
+		return repository.findByIban(iban);
+	}
 
 
 	@Override

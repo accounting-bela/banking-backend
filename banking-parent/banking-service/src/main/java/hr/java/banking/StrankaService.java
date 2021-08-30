@@ -16,6 +16,8 @@ public interface StrankaService extends BaseService<Stranka> {
 	Set<Stranka> findForKorisnik(String keycloakId);
 	
 	Iterable<Stranka> findOther(String keycloakId);
+
+	Iterable<Stranka> findByIban(String iban);
 	
 	Stranka saveMyStranka(Stranka stranka, String keycloakId) throws BankingStatusException;
 

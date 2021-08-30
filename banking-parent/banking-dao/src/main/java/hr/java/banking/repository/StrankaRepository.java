@@ -13,6 +13,8 @@ public interface StrankaRepository extends BaseRepository<Stranka> {
 	Optional<Stranka> findByIbanAndNaziv(String iban, String naziv);
 
 	Set<Stranka> findByKorisnikId(String korisnikId);
+
+	Iterable<Stranka> findByIban(String iban);
 	
 	Iterable<Stranka> findByKorisnikIdNotOrKorisnikIdIsNull(String id);
 

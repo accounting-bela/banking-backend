@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><Document xmlns="urn:iso:std:iso:20022:tech:xsd:scthr:pain.001.001.03">
+  <CstmrCdtTrfInitn>
+    <GrpHdr>
+      <MsgId>UN202108300001701</MsgId>
+      <CreDtTm>2021-08-30T22:15:56.151</CreDtTm>
+      <NbOfTxs>1</NbOfTxs>
+      <CtrlSum>170.0</CtrlSum>
+      <InitgPty>
+        <Nm>Karlo Belavić</Nm>
+      </InitgPty>
+    </GrpHdr>
+      <PmtInf>
+        <PmtInfId>510dd203-7c45-4b5a-ae85-f5ed1624ca21</PmtInfId>
+        <PmtMtd>TRF</PmtMtd>
+        <NbOfTxs>1</NbOfTxs>
+        <CtrlSum>170.0</CtrlSum>
+        <PmtTpInf>
+          <LclInstrm>
+            <Cd>TRF</Cd>
+          </LclInstrm>
+        </PmtTpInf>
+        <ReqdExctnDt>2021-08-30</ReqdExctnDt>
+        <Dbtr>
+          <Nm>Karlo Belavić</Nm>
+        </Dbtr>
+        <DbtrAcct>
+          <Id>
+            <IBAN>HR4823600003244453760</IBAN>
+          </Id>
+        </DbtrAcct>
+        <DbtrAgt>
+          <FinInstnId>
+              
+              <Othr>
+                <Id>NOTPROVIDED</Id>
+              </Othr>
+          </FinInstnId>
+        </DbtrAgt>
+          <CdtTrfTxInf>
+            <PmtId>
+              <EndToEndId>HR0012211</EndToEndId>
+            </PmtId>
+            <Amt>
+              <InstdAmt Ccy="HRK">170.0</InstdAmt>
+            </Amt>
+            <Cdtr>
+              <Nm>DŠR Aktivan život</Nm>
+            </Cdtr>
+            <CdtrAcct>
+              <Id>
+                <IBAN>HR6524840081104393164</IBAN>
+              </Id>
+            </CdtrAcct>
+            <RmtInf>
+              <Strd>
+                <CdtrRefInf>
+                  <Tp>
+                    <CdOrPrtry>
+                      <Cd>SCOR</Cd>
+                    </CdOrPrtry>
+                  </Tp>
+                  <Ref>HR0012211</Ref>
+                </CdtrRefInf>
+                <AddtlRmtInf>Mjesečna članarina </AddtlRmtInf>
+              </Strd>
+            </RmtInf>
+          </CdtTrfTxInf>
+      </PmtInf>
+  </CstmrCdtTrfInitn>
+</Document>
