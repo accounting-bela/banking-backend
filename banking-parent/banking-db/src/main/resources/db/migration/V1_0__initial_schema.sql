@@ -46,3 +46,11 @@ CREATE TABLE "racun"(
     FOREIGN KEY(primatelj_id) REFERENCES stranka(id),
     FOREIGN KEY(sifra_namjene_id) REFERENCES sifra_namjene(rbr)
 );
+
+create TABLE "certifikat"(
+    id VARCHAR(36) NOT NULL PRIMARY KEY,
+    privatni_kljuc TEXT NOT NULL,
+    certifikat TEXT NOT NULL,
+    serijski_broj TEXT NOT NULL,
+    korisnik_id VARCHAR(36) UNIQUE
+)
